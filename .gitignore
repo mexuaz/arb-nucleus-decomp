@@ -8,6 +8,10 @@
 *.DS_Store
 *.pic.d
 
+
+*.err
+*.out
+
 experimental
 cplib.sh
 
