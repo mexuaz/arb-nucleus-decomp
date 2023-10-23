@@ -139,6 +139,18 @@ $ bazel run :NucleusDecomposition_main -- -s -rounds 1 --rClique 3 --sClique 4 -
 cd /home/mehrafsa/scratch/arb-nucleus/arb-nucleus-decomp
 salloc --time=03:00:00 --ntasks=1 --cpus-per-task=8 --mem-per-cpu=4G --account=def-thomo
 module load StdEnv/2020 gcc/9.3.0 cmake/3.23.1 bazel/3.6.0
-bazel build //utils:snap_converter
-bazel run //utils:snap_converter -- -s -i ../datasets/wiki-Vote.txt -o ../datasets/wiki-Vote.adj
 ```
+Using makefile (recommanded)
+```bash
+cd utils
+make
+./snap_converter -- -s -i ../../datasets/wiki-Vote.txt -o ../../datasets/wiki-Vote.adj
+```
+
+
+Using Bazel:
+```bash
+bazel build //utils:snap_converter
+bazel run //utils:snap_converter -- -s -i ../../datasets/wiki-Vote.txt -o ../../datasets/wiki-Vote.adj
+```
+You might need to include include adding --action_env=PATH to your .bazelrc
