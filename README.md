@@ -130,8 +130,14 @@ After navigating to the `benchmarks/NucleusDecomposition/` directory, a template
 $ bazel run :NucleusDecomposition_main -- -s -rounds 1 --rClique 3 --sClique 4 --numberOfLevels TWO_LEVEL --inverseIndexMap STORED_POINTERS --relabel --updateAggregation LIST_BUFFER </path/to/input/graph>
 ```
 
-## Running code in ComputeCanada
+## Building Nucleus Decomposition in ComputeCanada
 
+```bash
+cd /home/mehrafsa/scratch/arb-nucleus/arb-nucleus-decomp/benchmarks/NucleusDecomposition
+salloc --time=03:00:00 --ntasks=1 --cpus-per-task=8 --mem-per-cpu=4G --gres=gpu:1 --account=def-thomo
+module load StdEnv/2020 gcc/9.3.0 cuda/12.2 cmake/3.23.1 bazel/3.6.0 
+bazel build :NucleusDecomposition_main
+```
 
 ### Converting Snapshot graphs
 

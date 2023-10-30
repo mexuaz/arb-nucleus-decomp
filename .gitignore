@@ -9,6 +9,10 @@
 *.pic.d
 
 
+# ignore core dumps
+core.*
+core
+
 *.err
 *.out
 
