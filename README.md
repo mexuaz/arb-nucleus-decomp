@@ -129,6 +129,18 @@ After navigating to the `benchmarks/NucleusDecomposition/` directory, a template
 ```sh
 $ bazel run :NucleusDecomposition_main -- -s -rounds 1 --rClique 3 --sClique 4 --numberOfLevels TWO_LEVEL --inverseIndexMap STORED_POINTERS --relabel --updateAggregation LIST_BUFFER </path/to/input/graph>
 ```
+## Building Bazel
+    
+```bash
+export BAZEL_VERSION=3.4.1
+wget https://github.com/bazelbuild/bazel/releases/download/$BAZEL_VERSION/bazel-$BAZEL_VERSION-dist.zip
+unzip bazel-$BAZEL_VERSION-dist.zip -d bazel-$BAZEL_VERSION && cd bazel-$BAZEL_VERSION
+salloc --time=03:00:00 --ntasks=1 --cpus-per-task=8 --mem-per-cpu=4G --account=def-thomo
+module load StdEnv/2020 cmake/3.27.7 gcc/9.3.0  cuda/12.2  java/11.0.16_8 python/3.11.5
+module load StdEnv/2023 cmake/3.27.7 gcc/12.3  cuda/12.2 java/17.0.6 python/3.11.5
+export BAZEL_LINKLIBS="-l%:libstdc++.a"
+./compile.sh
+```
 
 ## Building Nucleus Decomposition in ComputeCanada
 
