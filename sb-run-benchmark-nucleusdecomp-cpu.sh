@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #SBATCH --account=def-thomo
-#SBATCH --job-name=bmk-arb-nucleus-decomp-cpu-%j
-#SBATCH --output=bmk-arb-nucleus-decomp-cpu-%j.out
-#SBATCH --error=bmk-arb-nucleus-decomp-cpu-%j.err
+#SBATCH --job-name=bmk-arb-nucleus-decomp-gpu-%j
+#SBATCH --output=bmk-arb-nucleus-decomp-gpu-%j.out
+#SBATCH --error=bmk-arb-nucleus-decomp-gpu-%j.err
 #SBATCH --nodes=1 # Number of nodes
-#SBATCH --gres=cpu:24 # Number of CPUs (shared or exclusive)
-#SBATCH --mem=64G # Memory per node (Max memory on Cascade Lake with GPU 187G)
+#SBATCH --gres=cpu:16 # Number of CPUs (shared or exclusive)
+#SBATCH --mem=32G # Memory per node (Max memory on Cascade Lake with GPU 187G)
 #SBATCH --ntasks-per-node=1 # Number of tasks per node
-#SBATCH --time=10:00:00 # Time limit hrs:min:sec
+#SBATCH --time=8:00:00 # Time limit hrs:min:sec
 
 echo "Benchmarking arb-nucleus-decomp-cpu started ..."
 
