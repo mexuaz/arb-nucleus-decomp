@@ -5,8 +5,8 @@
 #SBATCH --output=bmk-arb-nucleus-decomp-gpu-%j.out
 #SBATCH --error=bmk-arb-nucleus-decomp-gpu-%j.err
 #SBATCH --nodes=1 # Number of nodes
-#SBATCH --gres=cpu:16 # Number of CPUs (shared or exclusive)
-#SBATCH --mem=32G # Memory per node (Max memory on Cascade Lake with GPU 187G)
+#SBATCH --cpus-per-task=16 # Number of CPUs per task
+#SBATCH --mem-per-cpu=4G # Memory per CPU
 #SBATCH --ntasks-per-node=1 # Number of tasks per node
 #SBATCH --time=8:00:00 # Time limit hrs:min:sec
 
