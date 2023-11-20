@@ -129,26 +129,27 @@ After navigating to the `benchmarks/NucleusDecomposition/` directory, a template
 ```sh
 $ bazel run :NucleusDecomposition_main -- -s -rounds 1 --rClique 3 --sClique 4 --numberOfLevels TWO_LEVEL --inverseIndexMap STORED_POINTERS --relabel --updateAggregation LIST_BUFFER </path/to/input/graph>
 ```
-## Building Bazel
+
+## Installing bazel 2.0.0 locally
     
 ```bash
-export BAZEL_VERSION=3.4.1
-wget https://github.com/bazelbuild/bazel/releases/download/$BAZEL_VERSION/bazel-$BAZEL_VERSION-dist.zip
-unzip bazel-$BAZEL_VERSION-dist.zip -d bazel-$BAZEL_VERSION && cd bazel-$BAZEL_VERSION
-salloc --time=03:00:00 --ntasks=1 --cpus-per-task=8 --mem-per-cpu=4G --account=def-thomo
-module load StdEnv/2020 cmake/3.27.7 gcc/9.3.0  cuda/12.2  java/11.0.16_8 python/3.11.5
-module load StdEnv/2023 cmake/3.27.7 gcc/12.3  cuda/12.2 java/17.0.6 python/3.11.5
-export BAZEL_LINKLIBS="-l%:libstdc++.a"
-./compile.sh
+cd $HOME/scratch
+curl -sLO --retry 5 --retry-max-time 10 https://storage.googleapis.com/bazel/2.0.0/release/bazel-2.0.0-installer-linux-x86_64.sh
+chmod +x bazel-2.0.0-installer-linux-x86_64.sh
+mkdir -p bazel/2.0.0
+./bazel-2.0.0-installer-linux-x86_64.sh --prefix=$HOME/scratch/bazel/2.0.0
+export PATH=$PATH:$HOME/scratch/bazel/2.0.0/bin
 ```
 
-## Building Nucleus Decomposition in ComputeCanada
+## Building Nucleus Decomposition with CMake in Compute Canada
 
 ```bash
-cd /home/mehrafsa/scratch/arb-nucleus/arb-nucleus-decomp/benchmarks/NucleusDecomposition
 salloc --time=03:00:00 --ntasks=1 --cpus-per-task=8 --mem-per-cpu=16G --gres=gpu:1 --account=def-thomo
-module load StdEnv/2020 gcc/9.3.0 cuda/12.2 cmake/3.23.1 bazel/3.6.0 
-bazel build :NucleusDecomposition_main
+cd $HOME/scratch/arb-nucleus/arb-nucleus-decomp
+mkdir build && cd build
+module purge; module load StdEnv/2023 cmake/3.27.7 gcc/12.3  cuda/12.2 java/17.0.6 python/3.11.5
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . --config Release
 ```
 
 ### Converting Snapshot graphs

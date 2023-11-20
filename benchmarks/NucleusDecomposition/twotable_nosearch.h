@@ -157,8 +157,8 @@ namespace twotable_nosearch {
           EndTableY* end_table = new EndTableY();
 
           Y max_val = static_cast<Y>(vtx); 
-          assert((max_val >> (max_bit - 1)) & 1U == 0U);
           std::size_t max_bit = sizeof(Y) * 8;
+          assert((max_val >> (max_bit - 1)) & 1U == 0U);
           Y one = 1;
           max_val |= (one << (max_bit - 1));
 
