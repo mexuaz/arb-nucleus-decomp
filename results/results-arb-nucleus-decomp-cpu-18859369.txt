@@ -1,0 +1,192 @@
+Benchmarking arb-nucleus-decomp-cpu started ...
+Clearing old output files ...
+Loading modules ...
+Benchmarking graph amazon-2008.txt started ...
+### Application: Nucleus Decomposition
+### Graph: ../datasets/amazon-2008.txt.adj
+### Threads: 48
+### n: 403394
+### m: 4886816
+### ------------------------------------
+Internal state: 
+tt: 5, nl: 2
+efficient: 1, relabel: 1, contig: 0
+End internal state: 
+### Rank Running Time: 0.17037
+### Filter Graph Running Time: 0.088625
+Num bytes needed: 6
+Num bits in n: 20
+Data Structure Size: 113175056
+### Table Running Time: 0.31226
+### Count Running Time: 0.174214
+### Num 4 cliques = 4420994
+num entries: 6670031
+list size: 26877116
+### Peel Running Time: 1.808
+rho: 42
+clique core: 8
+### Peel Running Time: 1.8793800000000001
+### Running Time: 2.6285989999999999
+Benchmarking graph amazon-2008.txt finished.
+Benchmarking graph cit-Patents.txt started ...
+### Application: Nucleus Decomposition
+### Graph: ../datasets/cit-Patents.txt.adj
+### Threads: 48
+### n: 3774768
+### m: 33037894
+### ------------------------------------
+Internal state: 
+tt: 5, nl: 2
+efficient: 1, relabel: 1, contig: 0
+End internal state: 
+### Rank Running Time: 0.09834
+### Filter Graph Running Time: 0.281789
+Num bytes needed: 6
+Num bits in n: 23
+Data Structure Size: 281787200
+### Table Running Time: 1.15058
+### Count Running Time: 0.646113
+### Num 4 cliques = 3501071
+num entries: 13836916
+list size: 55544656
+### Peel Running Time: 4.76912
+rho: 201
+clique core: 18
+### Peel Running Time: 4.7720060000000002
+### Running Time: 6.9499389999999996
+Benchmarking graph cit-Patents.txt finished.
+Benchmarking graph soc-BlogCatalog.txt started ...
+### Application: Nucleus Decomposition
+### Graph: ../datasets/soc-BlogCatalog.txt.adj
+### Threads: 48
+### n: 88785
+### m: 4186390
+### ------------------------------------
+Internal state: 
+tt: 5, nl: 2
+efficient: 1, relabel: 1, contig: 0
+End internal state: 
+### Rank Running Time: 0.001966
+### Filter Graph Running Time: 0.036909
+Num bytes needed: 5
+Num bits in n: 18
+Data Structure Size: 1300177872
+### Table Running Time: 0.313076
+### Count Running Time: 16.3248
+### Num 4 cliques = 959265206
+num entries: 81172316
+list size: 324886256
+### Peel Running Time: 234.325
+rho: 3139
+clique core: 71
+### Peel Running Time: 234.347343
+### Running Time: 251.03695999999999
+Benchmarking graph soc-BlogCatalog.txt finished.
+Benchmarking graph soc-FourSquare.txt started ...
+### Application: Nucleus Decomposition
+### Graph: ../datasets/soc-FourSquare.txt.adj
+### Threads: 48
+### n: 639015
+### m: 6429972
+### ------------------------------------
+Internal state: 
+tt: 5, nl: 2
+efficient: 1, relabel: 1, contig: 0
+End internal state: 
+### Rank Running Time: 0.031947
+### Filter Graph Running Time: 0.05038
+Num bytes needed: 6
+Num bits in n: 21
+Data Structure Size: 566985008
+### Table Running Time: 0.33737
+### Count Running Time: 2.4716
+### Num 4 cliques = 162628686
+num entries: 34797532
+list size: 139387120
+### Peel Running Time: 315.761
+rho: 356
+clique core: 31
+### Peel Running Time: 315.77393699999999
+### Running Time: 318.66581100000002
+Benchmarking graph soc-FourSquare.txt finished.
+Benchmarking graph soc-digg.txt started ...
+### Application: Nucleus Decomposition
+### Graph: ../datasets/soc-digg.txt.adj
+### Threads: 48
+### n: 770800
+### m: 11814264
+### ------------------------------------
+Internal state: 
+tt: 5, nl: 2
+efficient: 1, relabel: 1, contig: 0
+End internal state: 
+### Rank Running Time: 0.011956
+### Filter Graph Running Time: 0.094109
+Num bytes needed: 6
+Num bits in n: 21
+Data Structure Size: 1612177056
+### Table Running Time: 0.616617
+### Count Running Time: 9.9798
+### Num 4 cliques = 551400932
+num entries: 99990250
+list size: 400157992
+### Peel Running Time: 213.953
+rho: 3706
+clique core: 59
+### Peel Running Time: 213.96803499999999
+### Running Time: 224.67120199999999
+Benchmarking graph soc-digg.txt finished.
+Benchmarking graph soc-livejournal.txt started ...
+### Application: Nucleus Decomposition
+### Graph: ../datasets/soc-livejournal.txt.adj
+### Threads: 48
+### n: 4033138
+### m: 55866124
+### ------------------------------------
+Internal state: 
+tt: 5, nl: 2
+efficient: 1, relabel: 1, contig: 0
+End internal state: 
+### Rank Running Time: 0.085965
+### Filter Graph Running Time: 0.301456
+Num bytes needed: 6
+Num bits in n: 23
+Data Structure Size: 2232226480
+### Table Running Time: 2.89122
+### Count Running Time: 16.2747
+### Num 4 cliques = 1022827698
+num entries: 135481001
+list size: 542120996
+### Peel Running Time: 128.861
+rho: 2607
+clique core: 211
+### Peel Running Time: 128.90671
+### Running Time: 148.46141
+Benchmarking graph soc-livejournal.txt finished.
+Benchmarking graph wiki-Vote.txt started ...
+### Application: Nucleus Decomposition
+### Graph: ../datasets/wiki-Vote.txt.adj
+### Threads: 48
+### n: 8298
+### m: 201524
+### ------------------------------------
+Internal state: 
+tt: 5, nl: 2
+efficient: 1, relabel: 1, contig: 0
+End internal state: 
+### Rank Running Time: 0.000233
+### Filter Graph Running Time: 0.013627
+Num bytes needed: 4
+Num bits in n: 15
+Data Structure Size: 15561152
+### Table Running Time: 0.01565
+### Count Running Time: 0.052091
+### Num 4 cliques = 2077903
+num entries: 964258
+list size: 4054024
+### Peel Running Time: 4.68819
+rho: 342
+clique core: 15
+### Peel Running Time: 4.6885450000000004
+### Running Time: 4.7703870000000004
+Benchmarking graph wiki-Vote.txt finished.

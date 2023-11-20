@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #SBATCH --account=def-thomo
-#SBATCH --job-name=bmk-arb-nucleus-decomp-gpu-%j
-#SBATCH --output=bmk-arb-nucleus-decomp-gpu-%j.out
-#SBATCH --error=bmk-arb-nucleus-decomp-gpu-%j.err
+#SBATCH --job-name=bmk-arb-nucleus-decomp-cpu-%j
+#SBATCH --output=bmk-arb-nucleus-decomp-cpu-%j.out
+#SBATCH --error=bmk-arb-nucleus-decomp-cpu-%j.err
 #SBATCH --nodes=1 # Number of nodes
-#SBATCH --cpus-per-task=16 # Number of CPUs per task
+#SBATCH --cpus-per-task=32 # Number of CPUs per task
 #SBATCH --mem-per-cpu=4G # Memory per CPU
 #SBATCH --ntasks-per-node=1 # Number of tasks per node
 #SBATCH --time=8:00:00 # Time limit hrs:min:sec
