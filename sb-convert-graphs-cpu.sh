@@ -7,8 +7,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem-per-cpu=4096M      # memory; default unit is megabytes
 #SBATCH --ntasks-per-node=1 # Number of tasks per node
-#SBATCH --time=00:20:00 # Time limit hrs:min:sec
-
+#SBATCH --time=00:30:00 # Time limit hrs:min:sec
 
 # rm convert-graph-adj.out convert-graph-adj.err
 module load StdEnv/2020 gcc/9.3.0 cmake/3.23.1 bazel/3.6.0 
@@ -22,7 +21,7 @@ cd utils
 
 echo "Converting all graphs using ./snap_converter started ..."
 
-DATASETS=("cit-Patents.txt" "soc-LiveJournal1.txt" "wiki-Vote.txt")
+DATASETS=("amazon-2008.txt" "cit-Patents.txt" "soc-BlogCatalog.txt" "soc-FourSquare.txt" "soc-digg.txt" "soc-livejournal.txt" "wiki-Vote.txt")
 DATADIR="../../datasets"
 
 for GRAPH in "${DATASETS[@]}"

@@ -168,7 +168,7 @@ cd /home/mehrafsa/scratch/arb-nucleus/arb-nucleus-decomp
 salloc --time=03:00:00 --ntasks=1 --cpus-per-task=8 --mem-per-cpu=4G --account=def-thomo
 module load StdEnv/2020 gcc/9.3.0 cmake/3.23.1 bazel/3.6.0
 ```
-Using makefile (recommanded)
+Using makefile (recommended)
 ```bash
 cd utils
 make

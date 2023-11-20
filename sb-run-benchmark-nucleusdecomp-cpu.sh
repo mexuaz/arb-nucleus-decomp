@@ -8,7 +8,7 @@
 #SBATCH --gres=cpu:32 # Number of CPUs (shared or exclusive)
 #SBATCH --mem=64G # Memory per node (Max memory on Cascade Lake with GPU 187G)
 #SBATCH --ntasks-per-node=1 # Number of tasks per node
-#SBATCH --time=5:00:00 # Time limit hrs:min:sec
+#SBATCH --time=10:00:00 # Time limit hrs:min:sec
 
 echo "Benchmarking arb-nucleus-decomp-cpu started ..."
 
