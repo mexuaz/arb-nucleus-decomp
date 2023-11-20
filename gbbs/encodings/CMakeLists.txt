@@ -18,6 +18,7 @@ target_compile_options(decoders PRIVATE
     -Wall
     -Wextra
     -march=native
+    -Wno-unused-parameter
     $<$<CONFIG:Debug>:-O0>
     $<$<CONFIG:Release>:-O3>
 )

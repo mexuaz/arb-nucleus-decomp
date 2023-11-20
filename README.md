@@ -147,9 +147,18 @@ export PATH=$PATH:$HOME/scratch/bazel/2.0.0/bin
 salloc --time=03:00:00 --ntasks=1 --cpus-per-task=8 --mem-per-cpu=16G --gres=gpu:1 --account=def-thomo
 cd $HOME/scratch/arb-nucleus/arb-nucleus-decomp
 mkdir build && cd build
-module purge; module load StdEnv/2023 cmake/3.27.7 gcc/12.3  cuda/12.2 java/17.0.6 python/3.11.5
+module purge; module load StdEnv/2023 cmake/3.27.7 gcc/12.3 cuda/12.2 java/17.0.6 python/3.11.5
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . --config Release
+```
+
+## Running Nucleus Decomposition in Compute Canada
+
+```bash
+cd $HOME/scratch/arb-nucleus/arb-nucleus-decomp
+./build/benchmarks/NucleusDecomposition/NucleusDecomposition -s ../datasets/wiki-Vote.adj
+
+./build/benchmarks/NucleusDecomposition/NucleusDecomposition -- -s -rounds 1 --rClique 3 --sClique 4 --numberOfLevels TWO_LEVEL --inverseIndexMap STORED_POINTERS --relabel --updateAggregation LIST_BUFFER ../datasets/wiki-Vote.adj 
 ```
 
 ### Converting Snapshot graphs

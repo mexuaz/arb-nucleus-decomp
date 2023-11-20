@@ -46,6 +46,7 @@ target_compile_options(NucleusDecomposition PRIVATE
     -Wall
     -Wextra
     -march=native
+    -Wno-unused-parameter
     $<$<CONFIG:Debug>:-O0>
     $<$<CONFIG:Release>:-O3>
 )
