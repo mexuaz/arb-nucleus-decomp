@@ -18,12 +18,12 @@ rm benchmark-arb-nucleus-decomp-cpu*.out benchmark-arb-nucleus-decomp-cpu*.err
 echo "Loading modules ..."
 module purge; module load StdEnv/2023 cmake/3.27.7 gcc/12.3 java/17.0.6 python/3.11.5
 
-DATASETS=("cit-Patents.txt.adj" "soc-LiveJournal1.txt.adj" "wiki-Vote.txt.adj")
+DATASETS=("amazon-2008.txt" "cit-Patents.txt" "soc-BlogCatalog.txt" "soc-FourSquare.txt" "soc-digg.txt" "soc-livejournal.txt" "wiki-Vote.txt")
 PWD="../datasets"
 
 for GRAPH in "${DATASETS[@]}"
 do
     echo "Benchmarking graph $GRAPH started ..."
-    ./build/benchmarks/NucleusDecomposition/NucleusDecomposition -- -s -rounds 1 --rClique 3 --sClique 4 --numberOfLevels TWO_LEVEL --inverseIndexMap STORED_POINTERS --relabel --updateAggregation LIST_BUFFER ${PWD}/${GRAPH}
+    ./build/benchmarks/NucleusDecomposition/NucleusDecomposition -- -s -rounds 1 --rClique 3 --sClique 4 --numberOfLevels TWO_LEVEL --inverseIndexMap STORED_POINTERS --relabel --updateAggregation LIST_BUFFER ${PWD}/${GRAPH}.adj
     echo "Benchmarking graph $GRAPH finished."
 done
