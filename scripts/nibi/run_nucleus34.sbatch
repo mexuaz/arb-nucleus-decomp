@@ -13,15 +13,37 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-GRAPH_PATH="${1:-}"
+DATASET_ROOT="$REPO_ROOT/src/build/datasets"
+GRAPH_SELECTOR="${1:-}"
 THREADS="${SLURM_CPUS_PER_TASK:-56}"
 BAZEL_BIN="${BAZEL_BIN:-$HOME/.local/bin/bazelisk}"
 BAZEL_VERSION="${BAZEL_VERSION:-2.1.0}"
+RESULTS_ROOT="${SLURM_SUBMIT_DIR:-$REPO_ROOT}/results"
+RESULTS_DIR="$RESULTS_ROOT/${SLURM_JOB_NAME:-JeShiNucleus34}-${SLURM_JOB_ID:-manual}"
 
-if [[ -z "$GRAPH_PATH" ]]; then
-  echo "Usage: sbatch $0 /path/to/gbbs_graph"
-  exit 1
-fi
+LARGE_DATASETS=(
+  "amazon-2008.mtx" # 1
+  "soc-Slashdot0811.mtx" # 2
+  "soc-FourSquare.mtx" # 3
+  "cit-patent.edges" # 4
+  "soc-BlogCatalog.mtx" # 5
+  "soc-LiveJournal1.edges" # 6
+)
+
+resolve_large_dataset() {
+  local selector="$1"
+
+  if [[ "$selector" =~ ^[0-9]+$ ]]; then
+    local index="$selector"
+    if (( index < 1 || index > ${#LARGE_DATASETS[@]} )); then
+      echo "Invalid dataset index: $index (valid range: 1-${#LARGE_DATASETS[@]})" >&2
+      return 1
+    fi
+    printf '%s\n' "${LARGE_DATASETS[index - 1]}"
+  else
+    printf '%s\n' "$selector"
+  fi
+}
 
 load_first_module() {
   local module_name
@@ -54,6 +76,8 @@ export OMP_NUM_THREADS="$THREADS"
 
 cd "$REPO_ROOT"
 
+mkdir -p "$RESULTS_DIR"
+
 RUNNER="$REPO_ROOT/bazel-bin/benchmarks/NucleusDecomposition/NucleusDecomposition_main"
 
 if [[ ! -x "$RUNNER" ]]; then
@@ -75,4 +99,56 @@ RUN_ARGS=(
   -relabel
 )
 
-srun --cpu-bind=cores "$RUNNER" "${RUN_ARGS[@]}" "$GRAPH_PATH"
+run_one_graph() {
+  local graph_path="$1"
+  local result_tag="$2"
+  local result_file="$RESULTS_DIR/${result_tag}-$(date +%Y%m%dT%H%M%S).json"
+
+  if [[ ! -f "$graph_path" ]]; then
+    echo "Graph file not found: $graph_path" >&2
+    return 1
+  fi
+
+  set +e
+  srun --cpu-bind=cores "$RUNNER" "${RUN_ARGS[@]}" "$graph_path" | tee "$result_file"
+  local run_status=${PIPESTATUS[0]}
+  local tee_status=${PIPESTATUS[1]}
+  set -e
+
+  if [[ $run_status -ne 0 ]]; then
+    return "$run_status"
+  fi
+
+  return "$tee_status"
+}
+
+if [[ -z "$GRAPH_SELECTOR" ]]; then
+  exit_code=0
+  for graph_name in "${LARGE_DATASETS[@]}"; do
+    graph_path="$DATASET_ROOT/$graph_name"
+    result_tag="dataset-${graph_name}-t${THREADS}"
+    set +e
+    run_one_graph "$graph_path" "$result_tag"
+    run_status=$?
+    set -e
+    if [[ $run_status -ne 0 ]]; then
+      exit_code=$run_status
+    fi
+  done
+  exit "$exit_code"
+fi
+
+if [[ "$GRAPH_SELECTOR" =~ ^[0-9]+$ ]]; then
+  GRAPH_NAME="$(resolve_large_dataset "$GRAPH_SELECTOR")"
+  GRAPH_PATH="$DATASET_ROOT/$GRAPH_NAME"
+  RESULT_TAG="dataset-${GRAPH_SELECTOR}-${GRAPH_NAME}-t${THREADS}"
+else
+  GRAPH_PATH="$GRAPH_SELECTOR"
+  RESULT_TAG="$(basename "${GRAPH_PATH%.*}")-t${THREADS}"
+fi
+
+set +e
+run_one_graph "$GRAPH_PATH" "$RESULT_TAG"
+run_status=$?
+set -e
+exit "$run_status"
